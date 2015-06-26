@@ -76,7 +76,7 @@ def printAllProblems():
     start = 1045
     loginUrl = 'http://ac.jobdu.com/login.php'
     username = 'wzqwsrf'
-    password = 'wzq881021'
+    password = 'password'
     s = getLoginRequest(loginUrl, username, password)
     while start <= num:
         code = getEveryProbleJavaSolution(s, start, username)
