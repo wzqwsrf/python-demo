@@ -42,15 +42,10 @@ def getEveryProbleJavaSolution(s, probId, userId):
         body = tbody[i]
         # 针对每个body取出td。
         tds = body.findAll(name="td")
-        yuyan = tds[8].contents[0]
+        yuyan = tds[8].text
         # 列值是有规律的，不再遍历，10列
-        # yuyan = tds[8].string
-        if 'Java' in yuyan:
-            yuyan = 'Java'
-        elif 'C++' in yuyan:
-            yuyan = 'C++'
         ac = tds[3].find('font').string
-        if ac != 'Accepted' or yuyan != 'Java':
+        if ac != 'Accepted' or 'Java' not in yuyan :
             continue
         url = 'http://ac.jobdu.com/showsource.php?sid='+tds[0].string
         urlr = s.get(url)
@@ -61,30 +56,48 @@ def getEveryProbleJavaSolution(s, probId, userId):
             print probId
             print url
             print pre
+        print pre
         return pre[0].string
+
+
+# 获取文件名
+def getProbNames(s, probId):
+    r = s.get('http://ac.jobdu.com/problem.php?pid='+str(probId))
+    r.encoding = 'utf-8'
+    data = r.text
+    # 获取所有table内容，主要获取我的提交历史。这里的table应该只有一个。
+    table = soup(data, convertEntities=soup.HTML_ENTITIES)
+    # print table
+    head = table.findAll('dt', {"class": "title-hd"})
+    # print type(head[0])
+    return head[0].text
 
 # 写文件
 def writeStr(filename, code):
-    file_object = open(str(filename) +'.java', 'w')
+    print type(filename)
+    filename = filename.encode('utf-8','ignore')
+    file_object = open('Java/' +filename + '.java', 'w')
     file_object.write(code)
     file_object.close()
 
 
 # 主函数
 def printAllProblems():
-    num = 1100
-    start = 1045
+    num = 1557
+    start = 1001
     loginUrl = 'http://ac.jobdu.com/login.php'
     username = 'wzqwsrf'
     password = 'password'
-    s = getLoginRequest(loginUrl, username, password)
     while start <= num:
+        s = getLoginRequest(loginUrl, username, password)
         code = getEveryProbleJavaSolution(s, start, username)
-        if code == '':
+        if code is None or code == '':
             start += 1
             continue
-
-        writeStr(start, code)
+        print type(code)
+        filename = getProbNames(s, start)
+        print filename
+        writeStr(filename, code)
         start += 1
 
 if __name__ == '__main__':
