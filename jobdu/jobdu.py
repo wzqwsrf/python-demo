@@ -13,7 +13,7 @@ sys.setdefaultencoding('utf-8')
 
 
 # 根据登陆url，用户名，密码获取登陆后的requests
-def get_login_requests(loginUrl, userId, password):
+def get_login_requests(login_url, user_id, password):
     # 获取网页内容
     headers = {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -22,16 +22,16 @@ def get_login_requests(loginUrl, userId, password):
                       'Chrome/43.0.2357.130 Safari/537.36'
     }
     s = requests.session()
-    data = dict(user_id=userId, password=password)
-    s.post(loginUrl, data=data, headers=headers)
+    data = dict(user_id=user_id, password=password)
+    s.post(login_url, data=data, headers=headers)
     return s
 
 
 # 获取每道题目的Java内容
-def get_every_java_solution(s, probId, userId):
+def get_every_java_solution(s, prob_id, user_id):
     # 获取网页内容
     r = s.get('http://ac.jobdu.com/status.php?pid=' +
-              str(probId) + '&user_id=' + userId)
+              str(prob_id) + '&user_id=' + user_id)
     # 修改编码格式，否则输出为乱码
     r.encoding = 'utf-8'
     data = r.text
@@ -51,7 +51,7 @@ def get_every_java_solution(s, probId, userId):
         yuyan = tds[8].text
         # 列值是有规律的，不再遍历，10列
         ac = tds[3].find('font').string
-        if ac != 'Accepted' or 'Java' not in yuyan:
+        if ac != 'Accepted' or 'C++' not in yuyan:
             continue
         url = 'http://ac.jobdu.com/showsource.php?sid=' + tds[0].string
         urlr = s.get(url)
@@ -59,7 +59,7 @@ def get_every_java_solution(s, probId, userId):
         code = urlr.text
         pre = soup(code, convertEntities=soup.HTML_ENTITIES).findAll('pre')
         if len(pre) == 0:
-            print probId
+            print prob_id
             print url
             print pre
         print pre
@@ -67,8 +67,8 @@ def get_every_java_solution(s, probId, userId):
 
 
 # 获取文件名
-def get_prob_names(s, probId):
-    r = s.get('http://ac.jobdu.com/problem.php?pid=' + str(probId))
+def get_prob_names(s, prob_id):
+    r = s.get('http://ac.jobdu.com/problem.php?pid=' + str(prob_id))
     r.encoding = 'utf-8'
     data = r.text
     # 获取所有table内容，主要获取我的提交历史。这里的table应该只有一个。
@@ -80,10 +80,10 @@ def get_prob_names(s, probId):
 
 
 # 写文件
-def writeStr(filename, code):
+def write_file(filename, code):
     print type(filename)
     filename = filename.encode('utf-8', 'ignore')
-    file_object = open('Java/' + filename + '.java', 'w')
+    file_object = open('c++/' + filename + '.cpp', 'w')
     file_object.write(code)
     file_object.close()
 
@@ -93,7 +93,7 @@ def print_all_problems():
     num = 1557
     start = 1001
     login_url = 'http://ac.jobdu.com/login.php'
-    username = 'wzqwsrf'
+    username = 'wangzhenqing'
     password = 'password'
     while start <= num:
         s = get_login_requests(login_url, username, password)
@@ -104,7 +104,7 @@ def print_all_problems():
         print type(code)
         filename = get_prob_names(s, start)
         print filename
-        writeStr(filename, code)
+        write_file(filename, code)
         start += 1
 
 
