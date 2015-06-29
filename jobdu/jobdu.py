@@ -1,5 +1,8 @@
-__author__ = 'wzqwsrf'
-# encoding:utf-8
+# !/usr/bin/env python
+# -*- coding: utf-8 -*-
+# author: wangzhenqing <wangzhenqing1008@163.com>
+# date: 2015-06-29 14:32:07
+
 
 import requests
 from BeautifulSoup import BeautifulSoup as soup
@@ -10,11 +13,13 @@ sys.setdefaultencoding('utf-8')
 
 
 # 根据登陆url，用户名，密码获取登陆后的requests
-def getLoginRequest(loginUrl, userId, password):
+def get_login_requests(loginUrl, userId, password):
     # 获取网页内容
     headers = {
-        'Content-Type':'application/x-www-form-urlencoded',
-        'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/43.0.2357.130 Safari/537.36'
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) '
+                      'AppleWebKit/537.36 (KHTML, like Gecko) '
+                      'Chrome/43.0.2357.130 Safari/537.36'
     }
     s = requests.session()
     data = dict(user_id=userId, password=password)
@@ -23,9 +28,10 @@ def getLoginRequest(loginUrl, userId, password):
 
 
 # 获取每道题目的Java内容
-def getEveryProbleJavaSolution(s, probId, userId):
+def get_every_java_solution(s, probId, userId):
     # 获取网页内容
-    r = s.get('http://ac.jobdu.com/status.php?pid='+str(probId)+'&user_id='+userId)
+    r = s.get('http://ac.jobdu.com/status.php?pid=' +
+              str(probId) + '&user_id=' + userId)
     # 修改编码格式，否则输出为乱码
     r.encoding = 'utf-8'
     data = r.text
@@ -45,9 +51,9 @@ def getEveryProbleJavaSolution(s, probId, userId):
         yuyan = tds[8].text
         # 列值是有规律的，不再遍历，10列
         ac = tds[3].find('font').string
-        if ac != 'Accepted' or 'Java' not in yuyan :
+        if ac != 'Accepted' or 'Java' not in yuyan:
             continue
-        url = 'http://ac.jobdu.com/showsource.php?sid='+tds[0].string
+        url = 'http://ac.jobdu.com/showsource.php?sid=' + tds[0].string
         urlr = s.get(url)
         urlr.encoding = 'utf-8'
         code = urlr.text
@@ -61,8 +67,8 @@ def getEveryProbleJavaSolution(s, probId, userId):
 
 
 # 获取文件名
-def getProbNames(s, probId):
-    r = s.get('http://ac.jobdu.com/problem.php?pid='+str(probId))
+def get_prob_names(s, probId):
+    r = s.get('http://ac.jobdu.com/problem.php?pid=' + str(probId))
     r.encoding = 'utf-8'
     data = r.text
     # 获取所有table内容，主要获取我的提交历史。这里的table应该只有一个。
@@ -72,34 +78,36 @@ def getProbNames(s, probId):
     # print type(head[0])
     return head[0].text
 
+
 # 写文件
 def writeStr(filename, code):
     print type(filename)
-    filename = filename.encode('utf-8','ignore')
-    file_object = open('Java/' +filename + '.java', 'w')
+    filename = filename.encode('utf-8', 'ignore')
+    file_object = open('Java/' + filename + '.java', 'w')
     file_object.write(code)
     file_object.close()
 
 
 # 主函数
-def printAllProblems():
+def print_all_problems():
     num = 1557
     start = 1001
-    loginUrl = 'http://ac.jobdu.com/login.php'
+    login_url = 'http://ac.jobdu.com/login.php'
     username = 'wzqwsrf'
     password = 'password'
     while start <= num:
-        s = getLoginRequest(loginUrl, username, password)
-        code = getEveryProbleJavaSolution(s, start, username)
+        s = get_login_requests(login_url, username, password)
+        code = get_every_java_solution(s, start, username)
         if code is None or code == '':
             start += 1
             continue
         print type(code)
-        filename = getProbNames(s, start)
+        filename = get_prob_names(s, start)
         print filename
         writeStr(filename, code)
         start += 1
 
+
 if __name__ == '__main__':
-    printAllProblems()
+    print_all_problems()
     print 'over'

@@ -1,5 +1,8 @@
-__author__ = 'wzqwsrf'
-# encoding:utf-8
+# !/usr/bin/env python
+# -*- coding: utf-8 -*-
+# author: wangzhenqing <wangzhenqing1008@163.com>
+# date: 2015-06-29 16:50:53
+
 
 import re
 import requests
