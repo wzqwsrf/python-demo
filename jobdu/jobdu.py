@@ -70,8 +70,10 @@ def get_every_java_solution(s, prob_id, user_id):
 def get_prob_names(s, prob_id):
     r = s.get('http://ac.jobdu.com/problem.php?pid=' + str(prob_id))
     r.encoding = 'utf-8'
+    if r.status_code != 200:
+        return ''
     data = r.text
-    # 获取所有table内容，主要获取我的提交历史。这里的table应该只有一个。
+    # 获取题目内容
     table = soup(data, convertEntities=soup.HTML_ENTITIES)
     # print table
     head = table.findAll('dt', {"class": "title-hd"})

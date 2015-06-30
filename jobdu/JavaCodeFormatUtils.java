@@ -20,7 +20,7 @@ import java.util.Date;
 import java.util.Map;
 
 
-public class JavaCodeFormatTools {
+public class JavaCodeFormatUtils {
 
     /**
      * 调用eclipse jdt core对生成的java源码进行格式化
@@ -104,9 +104,6 @@ public class JavaCodeFormatTools {
         int k = 0;
         for (File file : files) { // 删除该文件夹下的文件和文件夹
             String fileName = file.getName();
-            if (fileName.contains("1005")) {
-                System.out.println(111);
-            }
             String head = getCodeHead(fileName);
             String code = getFileCode(file);
             code = head + code;
