@@ -23,7 +23,7 @@
 ------
 1. Python部分。
    - 直接运行jobdu.py会产生所有AC题目的Java或者C++代码。根据需要可以修改路径和用户名密码。
-   - 运行方式可以为`python jobdu.py`或者使用**pycharm**。
+   - 运行方式可以为`python jobdu.py`或者使用**Pycharm**导入项目以后运行。
 2. Java部分。
    - 抓取的代码格式会乱，没有格式化。
    - 调用eclipse快捷键的内部代码，对产生的Java代码进行格式化。
@@ -31,7 +31,7 @@
    - maven依赖  
    
      ```
-         <dependency>
+        <dependency>
             <groupId>org.eclipse.jdt</groupId>
             <artifactId>core</artifactId>
             <version>3.1.1</version>
