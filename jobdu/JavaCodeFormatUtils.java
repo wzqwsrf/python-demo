@@ -36,12 +36,14 @@ public class JavaCodeFormatUtils {
         m.put(JavaCore.COMPILER_CODEGEN_TARGET_PLATFORM, 1.6);
         m.put(JavaCore.COMPILER_SOURCE, 1.6);
         m.put(DefaultCodeFormatterConstants.FORMATTER_LINE_SPLIT, "80");
-        m.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR, JavaCore.SPACE);
+        m.put(DefaultCodeFormatterConstants.FORMATTER_TAB_CHAR,
+                JavaCore.SPACE);
 
         IDocument doc = null;
         try {
             CodeFormatter codeFormatter = ToolFactory.createCodeFormatter(m);
-            TextEdit textEdit = codeFormatter.format(CodeFormatter.K_UNKNOWN, code, 0, code.length(), 0, null);
+            TextEdit textEdit = codeFormatter.format(
+                    CodeFormatter.K_UNKNOWN, code, 0, code.length(), 0, null);
             if (textEdit != null) {
                 doc = new Document(code);
                 textEdit.apply(doc);
@@ -102,7 +104,7 @@ public class JavaCodeFormatUtils {
         }
         File[] files = dirFile.listFiles();
         int k = 0;
-        for (File file : files) { // 删除该文件夹下的文件和文件夹
+        for (File file : files) { // 遍历文件
             String fileName = file.getName();
             String head = getCodeHead(fileName);
             String code = getFileCode(file);
@@ -143,7 +145,8 @@ public class JavaCodeFormatUtils {
     public static String getCodeHead(String fileName) {
         String probId = fileName.substring(2, 6);
         String probName = fileName.substring(0, fileName.length() - 5);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat dateFormat = new
+                SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String head = "" + "\n";
         head += "" + "\n";
         head += "// " + probName + "\n";

@@ -53,7 +53,8 @@ public class CCodeUrlUtils {
      *
      * @param path
      */
-    public static void getDirectoryFiles(String path, String newPath, String cPath) {
+    public static void getDirectoryFiles(String path, String newPath,
+                                         String cPath) {
         File dirFile = new File(path);
         if (!dirFile.isDirectory()) {
             System.err.println(path + "不是文件夹，请检查!");
@@ -61,7 +62,8 @@ public class CCodeUrlUtils {
         File[] files = dirFile.listFiles();
         for (File file : files) {
             String fileName = file.getName();
-            String head = getJavaHeadInfo(newPath + File.separator + fileName.substring(0, fileName.length() - 4) + ".java");
+            String head = getJavaHeadInfo(newPath + File.separator +
+                    fileName.substring(0, fileName.length() - 4) + ".java");
             String code = getFileCode(file, fileName);
             code = head + code;
             if ("".equals(code)) {

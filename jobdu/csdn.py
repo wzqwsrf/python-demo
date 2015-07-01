@@ -25,7 +25,8 @@ def get_cdsn_url():
     for x in xrange(1, 20):
         print x
         s = requests.session()
-        r = s.get('http://blog.csdn.net/u013027996/article/list/' + str(x), headers=headers)
+        cur_url = 'http://blog.csdn.net/u013027996/article/list/' + str(x)
+        r = s.get(cur_url, headers=headers)
         # 这里主要转义一些特殊符号，如<会有问题
         r.encoding = 'utf-8'
         # , 'id': 'article_list'

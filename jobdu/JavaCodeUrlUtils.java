@@ -14,7 +14,8 @@ import java.util.regex.Pattern;
 
 public class JavaCodeUrlUtils {
 
-    private static Map<String, String> articleMap = new HashMap<String, String>();
+    private static Map<String, String> articleMap =
+                                new HashMap<String, String>();
 
     /**
      * @param file
@@ -27,7 +28,7 @@ public class JavaCodeUrlUtils {
     public static String getFileCode(File file, String fileName) {
         fileName = fileName.substring(0, fileName.length() - 5);
         System.out.println(fileName);
-        if (fileName.equals("题目1040：Prime Number")){
+        if (fileName.equals("题目1040：Prime Number")) {
             System.out.println(111);
         }
         String code = "";
