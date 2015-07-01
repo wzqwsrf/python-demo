@@ -25,12 +25,13 @@ def get_directory_files(path, newpath, prob_dict):
             if k == 1:
                 key = line.replace('//', '').strip()
                 new_file_name = prob_dict[key]
-            code += line + '\n'
+            code += line
             k += 1
         if new_file_name not in files:
             files.append(new_file_name)
         else:
             print file_name
+        new_file_name += '.java'
         new_file_name = os.path.join(newpath, new_file_name)
         write_file(new_file_name, code)
 
@@ -65,7 +66,7 @@ def get_filename_by_probname():
 
 if __name__ == '__main__':
     prob_dict = get_filename_by_probname()
-    path = '/Users/wangzhenqing/git_work/python-demo/leetcode/test1'
+    path = '/Users/wangzhenqing/git_work/Leetcode/Java'
     newpath = '/Users/wangzhenqing/git_work/python-demo/leetcode/test2'
     get_directory_files(path, newpath, prob_dict)
     print 'over'
