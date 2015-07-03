@@ -4,7 +4,7 @@
 # date: 2015-07-01 17:08:11
 
 import requests
-from BeautifulSoup import BeautifulSoup as soup
+from bs4 import BeautifulSoup as soup
 import sys
 
 reload(sys)
@@ -24,9 +24,8 @@ def get_leetcode_url():
     cur_url = 'https://leetcode.com/problemset/algorithms/'
     s = requests.session()
     r = s.get(cur_url, headers=headers)
-    # 这里主要转义一些特殊符号，如<会有问题
     r.encoding = 'utf-8'
-    html = soup(r.text, convertEntities=soup.HTML_ENTITIES)
+    html = soup(r.contents)
     problem_list = html.findAll('table', {"id": "problemList"})
     tbody = problem_list[0].find('tbody')
     common_url = 'https://leetcode.com'

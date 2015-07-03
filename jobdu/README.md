@@ -8,15 +8,15 @@
 ## python第三方依赖
 ------
 1. **`requests`**
-2. **`BeautifulSoup`**
+2. **`beautifulsoup4`**
 3. 可以使用如下命令安装第三方依赖包。
    - `pip install requests`
-   - `pip install BeautifulSoup`
+   - `pip install beautifulsoup4`
 4. 或者安装**`virtualenv`**
    - `virtualenv .venv`
    - `source .venv/bin/active`
    - `pip install requests`
-   - `pip install BeautifulSoup`
+   - `pip install beautifulsoup4`
    
 
 ## 运行

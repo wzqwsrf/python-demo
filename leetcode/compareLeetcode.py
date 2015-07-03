@@ -3,7 +3,6 @@
 # author: wangzhenqing <wangzhenqing1008@163.com>
 # date: 2015-07-01 17:26:57
 
-import os
 import sys
 
 reload(sys)

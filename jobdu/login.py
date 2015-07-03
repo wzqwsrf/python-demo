@@ -5,7 +5,7 @@
 
 
 import requests
-from BeautifulSoup import BeautifulSoup as soup
+from bs4 import BeautifulSoup as soup
 
 
 # 测试爬虫时需要登陆的访问情况
@@ -24,7 +24,7 @@ def login():
     # 修改编码格式，否则输出为乱码
     r.encoding = 'utf-8'
     # 这里主要转义一些特殊符号，如<会有问题
-    pres = soup(r.text, convertEntities=soup.HTML_ENTITIES).findAll('pre')
+    pres = soup(r.text).findAll('pre')
     print pres[0].string
 
 

@@ -4,7 +4,7 @@
 # date: 2015年07月02日15:53:50
 
 import requests
-from BeautifulSoup import BeautifulSoup as soup
+from bs4 import BeautifulSoup as soup
 import sys
 
 reload(sys)
@@ -26,7 +26,7 @@ def get_github_url():
     r = s.get(cur_url, headers=headers)
     # 这里主要转义一些特殊符号，如<会有问题
     r.encoding = 'utf-8'
-    html = soup(r.text, convertEntities=soup.HTML_ENTITIES)
+    html = soup(r.text)
     problem_list = html.findAll('table', {"class": "files"})
     tbody = problem_list[0].find('tbody')
     common_url = 'https://github.com'

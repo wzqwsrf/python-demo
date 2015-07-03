@@ -404,9 +404,9 @@
 64.233.162.83    hwswbits.blogspot.com
 64.233.162.83    huhamhire-hosts.googlecode.com
 64.233.162.83    wiki.huhamhire-hosts.googlecode.com
-#SectionEnd: google
+# Section End: google
 
-#SectionStart: google_apis
+# Section Start: google_apis
 64.233.162.83    0-open-opensocial.googleusercontent.com
 64.233.162.83    0-focus-opensocial.googleusercontent.com
 64.233.162.83    1-focus-opensocial.googleusercontent.com
@@ -589,9 +589,9 @@
 64.233.162.83    img0.gmodules.com
 64.233.162.83    betaspike.appspot.com
 64.233.162.83    m-dot-betaspike.appspot.com
-#SectionEnd: google_apis
+# Section End: google_apis
 
-#SectionStart: facebook
+# Section Start: facebook
 104.70.6.120     s-static.ak.facebook.com
 95.101.253.30    s-static.ak.facebook.com
 63.238.2.217     static.ak.facebook.com
@@ -790,9 +790,9 @@
 69.171.255.12    channel-testing-ecmp-05-ash3.facebook.com
 69.171.246.18    channel-testing-ecmp-05-ash3.facebook.com
 69.171.239.12    channel-testing-ecmp-05-ash3.facebook.com
-#SectionEnd: facebook
+# Section End: facebook
 
-#SectionStart: twitter
+# Section Start: twitter
 208.78.70.34     search.twitter.com
 204.13.250.34    search.twitter.com
 208.78.71.34     search.twitter.com
@@ -1088,9 +1088,9 @@
 205.251.194.192  web10.twitpic.com
 205.251.198.4    web10.twitpic.com
 96.127.160.130   web10.twitpic.com
-#SectionEnd: twitter
+# Section End: twitter
 
-#SectionStart: youtube
+# Section Start: youtube
 64.233.162.83    accounts.youtube.com
 64.233.162.83    apiblog.youtube.com
 64.233.162.83    clients1.youtube.com
@@ -1709,9 +1709,9 @@
 64.233.162.83    v22.lscache8.c.youtube.com
 64.233.162.83    v23.lscache8.c.youtube.com
 64.233.162.83    v24.lscache8.c.youtube.com
-#SectionEnd: youtube
+# Section End: youtube
 
-#SectionStart: wikipedia
+# Section Start: wikipedia
 91.198.174.192   wikipedia.org
 198.35.26.96     wikipedia.org
 91.198.174.239   wikipedia.org
@@ -1852,9 +1852,9 @@
 91.198.174.192   incubator.wikimedia.org
 198.35.26.96     incubator.wikimedia.org
 91.198.174.239   incubator.wikimedia.org
-#SectionEnd: wikipedia
+# Section End: wikipedia
 
-#SectionStart: flickr
+# Section Start: flickr
 208.71.44.30     geo.yahoo.com
 119.161.24.16    geo.yahoo.com
 98.138.81.72     geo.yahoo.com
@@ -1989,9 +1989,9 @@
 98.138.250.88    ne1.farm7.staticflickr.com
 203.84.221.53    ne1.farm7.staticflickr.com
 68.180.131.16    ne1.farm7.staticflickr.com
-#SectionEnd: flickr
+# Section End: flickr
 
-#SectionStart: github
+# Section Start: github
 192.30.252.129   github.com
 192.30.252.131   github.com
 204.13.251.16    github.com
@@ -2028,9 +2028,9 @@
 199.27.74.133    training.github.com
 199.27.78.133    training.github.com
 204.13.250.4     training.github.com
-#SectionEnd: github
+# Section End: github
 
-#SectionStart: dropbox
+# Section Start: dropbox
 108.160.172.232  dropbox.com
 205.251.193.59   dropbox.com
 205.251.196.138  dropbox.com
@@ -5566,9 +5566,9 @@
 205.251.195.127  notify9.dropbox.com
 205.251.192.83   notify9.dropbox.com
 205.251.199.144  notify9.dropbox.com
-#SectionEnd: dropbox
+# Section End: dropbox
 
-#SectionStart: onedrive
+# Section Start: onedrive
 134.170.108.154  onedrive.live.com
 134.170.108.26   onedrive.live.com
 134.170.107.26   onedrive.live.com
@@ -5579,9 +5579,9 @@
 134.170.110.48   skyapi.onedrive.live.com
 134.170.105.152  skyapi.onedrive.live.com
 95.100.168.130   skyapi.onedrive.live.com
-#SectionEnd: onedrive
+# Section End: onedrive
 
-#SectionStart: wordpress
+# Section Start: wordpress
 72.21.91.8       i.polldaddy.com
 93.184.220.20    i.polldaddy.com
 91.229.144.30    i.polldaddy.com
@@ -5687,9 +5687,9 @@
 192.0.80.240     lb.gravatar.com
 192.0.80.241     lb.gravatar.com
 192.0.80.242     lb.gravatar.com
-#SectionEnd: wordpress
+# Section End: wordpress
 
-#SectionStart: others
+# Section Start: others
 59.151.113.208   bbs.operachina.com
 59.151.113.209   bbs.operachina.com
 58.67.157.89     bbs.operachina.com
@@ -5960,4 +5960,4 @@
 162.159.252.4    s3.feedly.com
 162.159.253.4    s3.feedly.com
 162.159.254.4    s3.feedly.com
-#SectionEnd: others
+# Section End: others

@@ -5,7 +5,7 @@
 
 
 import requests
-from BeautifulSoup import BeautifulSoup as soup
+from bs4 import BeautifulSoup as soup
 import sys
 
 reload(sys)
@@ -57,7 +57,7 @@ def get_every_java_solution(s, prob_id, user_id):
         urlr = s.get(url)
         urlr.encoding = 'utf-8'
         code = urlr.text
-        pre = soup(code, convertEntities=soup.HTML_ENTITIES).findAll('pre')
+        pre = soup(code).findAll('pre')
         if len(pre) == 0:
             print prob_id
             print url
@@ -74,7 +74,7 @@ def get_prob_names(s, prob_id):
         return ''
     data = r.text
     # 获取题目内容
-    table = soup(data, convertEntities=soup.HTML_ENTITIES)
+    table = soup(data)
     # print table
     head = table.findAll('dt', {"class": "title-hd"})
     # print type(head[0])

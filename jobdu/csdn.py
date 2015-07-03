@@ -5,7 +5,7 @@
 
 
 import requests
-from BeautifulSoup import BeautifulSoup as soup
+from bs4 import BeautifulSoup as soup
 import sys
 
 reload(sys)
@@ -31,13 +31,17 @@ def get_cdsn_url():
         r.encoding = 'utf-8'
         # , 'id': 'article_list'
         # print r.text
-        html = soup(r.text, convertEntities=soup.HTML_ENTITIES)
+        html = soup(r.text)
         link_titles = html.findAll('span', {"class": "link_title"})
-        # print articles
+        common_url = 'http://blog.csdn.net'
         for link_title in link_titles:
-            common_url = 'http://blog.csdn.net'
-            title = link_title.text
-            url = common_url + link_title.find('a')['href']
+            a = link_title.find('a')
+            title = ''
+            for s in a.stripped_strings:
+                if s != '':
+                   title = s
+            url = common_url + a['href']
+            print url
             url = title + '||' + url
             print url
             if url in urls:

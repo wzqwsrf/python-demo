@@ -6,7 +6,7 @@
 
 import sys
 import requests
-from BeautifulSoup import BeautifulSoup as soup
+from bs4 import BeautifulSoup as soup
 
 reload(sys)
 sys.setdefaultencoding("utf-8")
@@ -26,13 +26,13 @@ def get_hosts_contents():
     r.encoding = 'utf-8'
     print r.status_code
     data = r.text
-    pres = soup(data, convertEntities=soup.HTML_ENTITIES).findAll('pre')
+    pres = soup(data).findAll('pre')
     content_list = []
     for span in pres[1].findAll('span', {"class": "line"}):
         contents = span.contents
         clen = len(contents)
         print clen
-        print contents
+        # print contents
         if '2015' in span.text:
             content_list.append(span.text)
             continue
