@@ -8,6 +8,6 @@
 
 ## 运行
 ------
-1. 安装第三方依赖包`requests`,`BeautifulSoup`即可。
+1. 安装第三方依赖包`requests`,`beautifulsoup4`即可。
 2. `python hosts.py`会在当前目录下产生hosts文件。
 3. 追加到**/etc/hosts**文件中即可。
