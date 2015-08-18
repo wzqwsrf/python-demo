@@ -5,13 +5,13 @@
 
 import requests
 from bs4 import BeautifulSoup as soup
+from common import get_community_list, write_file
 import sys
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
 
-# 获取leetcode列表
 def get_ziru_url(urls, rental):
     # 获取网页内容
     headers = {
@@ -50,29 +50,15 @@ def get_ziru_url(urls, rental):
     return urls
 
 
-def get_community_list():
-    return ['世纪龙翔嘉园', '翠堤春晓', '林奥嘉园', '新街坊', '平安嘉苑', '清友园',
-            '茉藜园', '绣菊园', '蕴实园', '来春园', '北京青年城', '来北家园',
-            '望春园', '旭辉奥都', '拂林园', '天居园', '天畅园', '上元君庭']
-
-
-def get_all_data():
-    all_data = []
+def get_house_list():
+    house_list = []
     rentals = get_community_list()
     for rental in rentals:
-        all_data = get_ziru_url(all_data, rental)
-    return all_data
-
-
-# 写文件
-def write_file(urls):
-    file_object = open('ziru.txt', 'w')
-    for url in urls:
-        file_object.write(url + '\n')
-    file_object.close()
+        house_list = get_ziru_url(house_list, rental)
+    return house_list
 
 
 if __name__ == '__main__':
-    urls = get_all_data()
-    write_file(urls)
+    urls = get_house_list()
+    write_file(urls, 'ziru.txt')
     print 'over'

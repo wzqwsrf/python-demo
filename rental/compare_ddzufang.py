@@ -1,18 +1,29 @@
 # !/usr/bin/env python
 # -*- coding: utf-8 -*-
 # author: wangzhenqing <wangzhenqing1008@163.com>
-# date: 2015-08-17 14:07:29
+# date: 2015-08-18 18:05:52
 
 import requests
 from bs4 import BeautifulSoup as soup
-from common import get_community_list, write_file
+from common import get_community_list
+from send_mail import send_to_special
 import sys
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
 
-def get_ddzufang_url(urls, rental):
+def read_file(filename):
+    house_list = []
+    lines = open(filename).readlines()
+    for line in lines:
+        line = line.replace('\n', '')
+        line = line.split('|')[-1]
+        house_list.append(line.strip())
+    return house_list
+
+
+def get_ddzufang_url(house_list_old, urls, rental):
     # 获取网页内容
     headers = {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -38,23 +49,32 @@ def get_ddzufang_url(urls, rental):
         desc = ps[1].text
         price = div_right.find('dt')
         price = price.find('span').text
-        print url
-        print desc
-        print name
-        print price
-        urls.append(name + ' | ' + desc + ' | ' + price + ' | ' + url)
+        # print url
+        # print desc
+        # print name
+        # print price
+        if url not in house_list_old:
+            print url
+            print house_list_old
+            urls.append(name + ' | ' + desc + ' | ' + price + ' | ' + url)
     return urls
 
 
-def get_house_list():
+def get_house_list(old_house_list):
     house_list = []
     rentals = get_community_list()
     for rental in rentals:
-        house_list = get_ddzufang_url(house_list, rental)
+        house_list = get_ddzufang_url(old_house_list, house_list, rental)
     return house_list
 
 
 if __name__ == '__main__':
-    urls = get_house_list()
-    write_file(urls, 'ddzufang.txt')
+    file_lines = read_file('ddzufang.txt')
+    house_list_new = get_house_list(file_lines)
+    if len(house_list_new):
+        msg = ''
+        for house in house_list_new:
+            msg = msg + house + '\n'
+    send_to_special('丁丁租房', msg)
+    print msg
     print 'over'
