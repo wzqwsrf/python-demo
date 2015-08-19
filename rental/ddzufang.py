@@ -38,6 +38,8 @@ def get_ddzufang_url(urls, rental):
         desc = ps[1].text
         price = div_right.find('dt')
         price = price.find('span').text
+        if rental not in name:
+            continue
         print url
         print desc
         print name

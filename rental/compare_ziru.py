@@ -1,7 +1,7 @@
 # !/usr/bin/env python
 # -*- coding: utf-8 -*-
 # author: wangzhenqing <wangzhenqing1008@163.com>
-# date: 2015-08-18 18:05:52
+# date: 2015-08-19 09:56:12
 
 import requests
 from bs4 import BeautifulSoup as soup
@@ -22,8 +22,7 @@ def read_file(filename):
         house_list.append(line.strip())
     return house_list
 
-
-def get_ddzufang_url(house_list_old, urls, rental):
+def get_ziru_url(house_list_old, urls, rental):
     # 获取网页内容
     headers = {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -31,34 +30,31 @@ def get_ddzufang_url(house_list_old, urls, rental):
                       'AppleWebKit/537.36 (KHTML, like Gecko) '
                       'Chrome/43.0.2357.130 Safari/537.36'
     }
-    cur_url = 'http://www.zufangzi.com/house/houseControllor/houseListPage.do'
-    data = {"keyword": rental}
+    cur_url = 'http://www.ziroom.com/z/nl/'
+    data = {"qwd": rental}
     s = requests.session()
     r = s.get(cur_url, headers=headers, params=data)
     r.encoding = 'utf-8'
     html = soup(r.text)
-    house_list = html.findAll('div', {"id": "houseList"})
-    divs = house_list[0].findAll('div', {"class": "listCon wid1000"})
-    for div in divs:
-        div_left = div.find('div', {"class": "listCon_c_l"})
-        div_right = div.find('div', {"class": "listCon_c_r"})
-        ps = div_left.findAll('p')
-        a = ps[0].find('a')
-        name = a.text
+    house_list = html.findAll('ul', {"id": "houseList"})
+    lis = house_list[0].findAll('li')
+    for li in lis:
+        div = li.find('div', {"class": "txt"})
+        h3 = div.find('h3')
+        box = div.find('div', {"class": "box"})
+        a = h3.findAll('a')[-1]
         url = a['href']
-        desc = ps[1].text
-        price = div_right.find('dt')
-        price = price.find('span').text
-        # print url
-        # print desc
-        # print name
-        # print price
-        if rental not in name:
+        name = a.text
+        data_addr = h3.find('b')['data-addr'].replace('\n', '')
+        data_addr = str(data_addr)
+        data_addr = data_addr.split(" ")[0]
+        price = box.find('p', {"class": "p1"})
+        price = price.find('span', {"class": "en"}).text
+        if rental not in data_addr:
             continue
         if url not in house_list_old:
             print url
-            print house_list_old
-            urls.append(name + ' | ' + desc + ' | ' + price + ' | ' + url)
+            urls.append(name + ' | ' + data_addr + ' | ' + price + ' | ' + url)
     return urls
 
 
@@ -66,17 +62,19 @@ def get_house_list(old_house_list):
     house_list = []
     rentals = get_community_list()
     for rental in rentals:
-        house_list = get_ddzufang_url(old_house_list, house_list, rental)
+        house_list = get_ziru_url(old_house_list, house_list, rental)
     return house_list
 
 
 if __name__ == '__main__':
-    file_lines = read_file('ddzufang.txt')
+    file_lines = read_file('ziru.txt')
     house_list_new = get_house_list(file_lines)
+
     if len(house_list_new):
         msg = ''
         for house in house_list_new:
             msg = msg + house + '\n'
-    send_to_special('丁丁租房', msg)
-    print msg
+        send_to_special('自如友家', msg)
+        print msg
+        print 'send_over'
     print 'over'

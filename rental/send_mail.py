@@ -11,7 +11,7 @@ import smtplib
 
 def send_email(toAdd, subject, htmlText):
     strTo = ','.join(toAdd)
-    msgRoot = MIMEText(htmlText, 'html', 'utf-8')
+    msgRoot = MIMEText(htmlText.encode('utf-8'), 'plain', 'utf-8')
     msgRoot['Subject'] = Header(subject, 'utf-8')
     msgRoot['To'] = strTo
     msgRoot.preamble = 'This is a multi-part message in MIME format.'
@@ -20,7 +20,7 @@ def send_email(toAdd, subject, htmlText):
     smtp = smtplib.SMTP("smtp.126.com")
     # 设定调试级别，依情况而定
     smtp.set_debuglevel(1)
-    # smtp.login("wzqwsrf@126.com", "password")
+    smtp.login("wzqwsrf@126.com", "password")
     smtp.sendmail('wzqwsrf@126.com', toAdd, msgRoot.as_string())
     smtp.quit()
     return
