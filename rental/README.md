@@ -11,8 +11,10 @@
 3. 邮件内容是这样的：
    
    ![在这里](https://github.com/wzqwsrf/python-demo/blob/master/rental/compare_ddzufang.png)
+   ![在这里](https://github.com/wzqwsrf/python-demo/blob/master/rental/compare_ziru.png)
 
 ## 类
 1. **[ddzufang.py](https://github.com/wzqwsrf/python-demo/blob/master/rental/ddzufang.py)** 用来抓取丁丁租房所有附近小区的信息。
 2. **[ziru.py](https://github.com/wzqwsrf/python-demo/blob/master/rental/ziru.py)**用来抓取自如所有附近小区的信息。
 3. **[compare_ddzufang.py](https://github.com/wzqwsrf/python-demo/blob/master/rental/compare_ddzufang.py)**用来比较丁丁租房信息更新。
+4. **[compare_ziru.py](https://github.com/wzqwsrf/python-demo/blob/master/rental/compare_ziru.py)**用来比较自如友家信息更新。
