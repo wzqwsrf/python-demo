@@ -21,6 +21,7 @@ def get_ziru_url(urls, rental):
                       'Chrome/43.0.2357.130 Safari/537.36'
     }
     cur_url = 'http://www.ziroom.com/z/nl/'
+    common_url = 'http://www.ziroom.com'
     data = {"qwd": rental}
     s = requests.session()
     r = s.get(cur_url, headers=headers, params=data)
@@ -46,7 +47,7 @@ def get_ziru_url(urls, rental):
         print data_addr
         print name
         print price
-        urls.append(name + ' | ' + price + ' | ' + data_addr + ' | ' + url)
+        urls.append(name + ' | ' + price + ' | ' + data_addr + ' | ' + common_url + url)
     return urls
 
 
